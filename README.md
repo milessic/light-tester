@@ -14,6 +14,16 @@ python3 server.py
 Open http://localhost:8000 on the same computer. Only `static/` is served, so
 source files and TLS keys outside that directory are not exposed.
 
+To listen on all IPv6 interfaces:
+
+```sh
+python3 server.py --bind ::
+```
+
+Open `http://[::1]:8000` locally, or use the server's IPv6 address in brackets
+from another device. `--bind` also accepts IPv4 addresses; `--host` remains an
+alias. The default bind address is `127.0.0.1`.
+
 ### Use on an iPhone
 
 Camera access requires a secure context. A plain `http://192.168.…` address on
