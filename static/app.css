@@ -1,0 +1,25 @@
+/* App widgets use only the public milessic-themes tokens. */
+[hidden] { display: none !important; }
+.test-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; align-items: start; }
+.camera-view { position: relative; overflow: hidden; background: var(--surface-2); border: 1px solid var(--line); border-radius: calc(var(--radius) / 2); }
+.camera-view video { display: block; width: 100%; height: auto; }
+.camera-placeholder { min-height: 17rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 1.5rem; color: var(--ink-2); }
+.camera-target { position: absolute; left: 35%; top: 35%; width: 30%; height: 30%; border: 3px dashed var(--accent); outline: 1px solid var(--ink); pointer-events: none; }
+.camera-actions { margin-block: 1rem; flex-wrap: wrap; }
+.signal-row { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+#brightness { width: 100%; height: .75rem; accent-color: var(--accent); }
+.timer-panel { display: flex; align-items: center; flex-direction: column; text-align: center; padding-block: 1.5rem; margin-bottom: 1rem; background: var(--surface-2); border: 1px solid var(--line); border-radius: calc(var(--radius) / 2); }
+.timer { display: block; font-size: clamp(2rem, 5vw, 3.6rem); font-variant-numeric: tabular-nums; line-height: 1.3; color: var(--ink); }
+.timer-panel p { padding-inline: .75rem; margin-bottom: 0; }
+.calibration p { margin-top: .5rem; }
+.instructions { padding-left: 1.4rem; line-height: 1.7; }
+.result-date { display: block; margin-top: .25rem; }
+#result-rows td { vertical-align: middle; overflow-wrap: anywhere; }
+#result-rows td:first-child { max-width: 20rem; }
+#result-rows td:nth-child(2) { white-space: nowrap; font-variant-numeric: tabular-nums; }
+@media (max-width: 760px) {
+  .test-layout { grid-template-columns: minmax(0, 1fr); }
+  .camera-placeholder { min-height: 12rem; }
+  .camera-actions button, .calibration button, #start { min-height: 44px; }
+  .timer { font-size: clamp(2rem, 10vw, 3.6rem); }
+}

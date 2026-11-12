@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Measure how long your bicycle light stays on using your camera.">
+  <title>Light tester</title>
+  <link rel="stylesheet" data-milessic-theme href="/themes/system.css?v=1.12.0">
+  <link rel="stylesheet" href="/app.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">Light tester</a>
+    <nav class="nav" aria-label="Main"><a class="active" href="#test">Test</a><a href="#results">Results</a></nav>
+    <div class="topbar-end"><span class="tag">On-device measurement</span></div>
+  </header>
+  <main class="container">
+    <div class="page-head"><h1>How long does your light last?</h1></div>
+    <noscript><p class="flash error">Enable JavaScript to read the camera and run the timer.</p></noscript>
+    <p id="notice" class="flash info" role="status">Place your phone on a steady surface and point its rear camera at the light.</p>
+    <p id="storage-warning" class="flash error" role="alert" hidden></p>
+    <div class="test-layout" id="test">
+      <section class="card" aria-labelledby="camera-title">
+        <div class="section-head"><h2 id="camera-title">01 / Frame your light</h2><span id="camera-status" class="badge tone-neutral">Camera off</span></div>
+        <div class="camera-view">
+          <video id="camera" autoplay muted playsinline hidden aria-label="Live rear camera preview"></video>
+          <div id="camera-placeholder" class="camera-placeholder"><strong>Your light goes here</strong><p>Keep the light inside the center box.<br>Camera frames stay on your phone.</p></div>
+          <div id="target" class="camera-target" hidden aria-hidden="true"></div>
+        </div>
+        <div class="toolbar camera-actions"><button id="enable-camera" class="btn primary">Enable camera</button><button id="disable-camera" class="btn ghost" disabled>Release camera</button></div>
+        <div class="signal-row"><label for="brightness">Center brightness</label><output id="brightness-value">—</output></div>
+        <progress id="brightness" max="255" value="0" aria-label="Center brightness from 0 to 255"></progress>
+        <p class="muted small">Keep the phone and light still. Use a steady light mode; flashing modes can trigger an early finish.</p>
+      </section>
+      <section class="card" aria-labelledby="timer-title">
+        <div class="section-head"><h2 id="timer-title">02 / Measure runtime</h2><span id="test-status" class="badge tone-neutral">Not started</span></div>
+        <div class="timer-panel"><span class="muted">Elapsed time</span><output id="timer" class="timer mono" aria-label="Elapsed time" aria-live="off">00:00:00.0</output><p id="timer-detail" class="muted">The timer starts when you press Start test.</p></div>
+        <div class="stack">
+          <label>Light name <input id="light-name" maxlength="80" placeholder="e.g. Front light · high mode" autocomplete="off"></label>
+          <div class="calibration"><button id="calibrate" class="btn" disabled>1. Capture ambient · light off</button><p id="calibration-status" class="small muted">Enable the camera, then switch the bicycle light off.</p></div>
+          <div class="row"><button id="start" class="btn primary" disabled>2. Start test · light on</button><button id="cancel" class="btn danger" disabled>Cancel test</button></div>
+          <div class="row"><button id="sound-test" class="btn ghost small">Test alert sound</button><span id="sound-status" class="small muted">Turn up your phone’s volume.</span></div>
+        </div>
+        <p id="wake-status" class="small muted">Keep this page visible and your screen unlocked throughout the test.</p>
+      </section>
+    </div>
+    <section class="card" id="results" aria-labelledby="results-title">
+      <div class="section-head"><h2 id="results-title">Your results</h2><button id="export" class="btn ghost small" disabled>Export JSON</button></div>
+      <p id="empty-results" class="muted">No tests yet. Completed tests are saved automatically in this browser.</p>
+      <div class="scroll-x"><table id="results-table" class="data" hidden><thead><tr><th>Light / started</th><th>Duration</th><th>Outcome</th><th><span class="muted">Manage</span></th></tr></thead><tbody id="result-rows"></tbody></table></div>
+      <p class="small muted">Results stay on this device in localStorage. Clearing browser data removes them. Export anything you want to keep.</p>
+    </section>
+    <section class="card" aria-labelledby="setup-title">
+      <h2 id="setup-title">A steady setup, a reliable test</h2>
+      <ol class="instructions"><li>Open this app over HTTPS on your iPhone and allow camera access.</li><li>With the bicycle light off, let the preview settle and capture ambient brightness.</li><li>Switch the light on, wait for the brightness to settle, then start. Timing begins at your tap.</li><li>Leave this page open. After a sustained brightness drop, the timer stops, an alert sounds, and the result is saved.</li></ol>
+      <p class="small muted">This measures visible light duration, not lumens. Changes in room lighting, camera exposure, or movement affect detection. Leaving the page or losing the camera interrupts the test.</p>
+      <footer class="small muted">Styling from <a href="https://mjthemes.mikrus.dev/">milessic-themes</a>.</footer>
+    </section>
+  </main>
+</body>
+</html>
